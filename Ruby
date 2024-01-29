@@ -1,0 +1,67 @@
+def fib(n)
+    return [] if n == 0
+    return [0] if n == 1
+    fibonacci_sequence = [0, 1]
+    (2..n - 1).each do |i|
+        next_fib = fibonacci_sequence[i - 1] + fibonacci_sequence[i - 2]
+        fibonacci_sequence << next_fib
+    end
+    return fibonacci_sequence
+    end
+
+def isPalindrome(n)
+    n_str = n.to_s
+    return n_str == n_str.reverse
+end
+
+def nthmax(n, a)
+    sorted_array = a.sort.reverse
+    if n >= 0 && n < sorted_array.length
+        return sorted_array[n]
+    else 
+        return nil
+    end
+end
+
+def freq(s)
+    char_count = {}
+    s.each_char do |char|
+        if char_count.key?(char)
+            char_count[char] += 1
+        else
+            char_count[char] = 1
+        end
+    end
+    max_char = nil
+    max_freq = 0
+
+    char_count.each do |char, freq|
+        if freq > max_freq
+            max_char = char
+            max_freq = freq
+        end
+    end
+    return max_char.to_s
+end
+
+def zipHash(arr1, arr2)
+    if arr1.length != arr2.length
+        return nil
+    end
+    result_hash = {}
+
+    arr1.each_with_index do |element, index|
+        result_hash[element] = arr2[index]
+    end
+    return result_hash
+    
+end
+
+def hashToArray(hash)
+    result_array = []
+    hash.keys.each do |key|
+        pair = [key, hash[key]]
+        result_array << pair
+    end
+    return result_array
+end
