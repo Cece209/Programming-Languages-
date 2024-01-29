@@ -1,0 +1,50 @@
+class PhoneBook
+
+    def initialize
+        @entries = {}
+        
+    end
+
+    def add(name, number, is_listed)
+        if @entries.key?(name) && @entries[name][:phoneNumber] == number
+                return false
+        end
+             @entries[name] = {phoneNumber: number, listed: is_listed}
+            return true
+    end
+    
+    def lookup(name)
+        if @entries.key?(name)
+            entry = @entries[name]
+            return entry[:listed]? entry[:phoneNumber] : nil
+        else
+            return nil
+        end
+    end
+
+    def lookupByNum(number)
+        @entries.each do |name, entry|
+            if entry[:phoneNumber] == number && entry[:listed]
+                return name
+            end
+        end
+        nil
+        
+    end
+    
+   def namesByAc(areacode)
+        matching_names = []
+        @entries.each do |name, entry|
+             phone_number = entry[:phoneNumber]
+             if phone_number.nil?
+                next
+             end
+                area_code = phone_number[0..2] 
+                 if area_code == areacode
+                matching_names << name
+                end
+            end
+            matching_names.sort
+        
+        end
+    end
